@@ -1,7 +1,5 @@
 import os
 import subprocess
-import gzip
-import shutil
 
 
 def download_kaggle_dataset(dataset, target_folder):

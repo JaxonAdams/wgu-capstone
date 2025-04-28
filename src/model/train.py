@@ -1,3 +1,5 @@
+import os
+
 import joblib
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
@@ -32,7 +34,7 @@ def test_model(model, X_test, y_test):
 @decorate_console_output("SAVING THE TRAINED MODEL")
 def save_model(model, filepath):
 
-    joblib.dump(model, filepath)
+    joblib.dump(model, filepath, compress=3)
     print(f"Model stored in file '{filepath}'")
 
 
@@ -49,7 +51,9 @@ def main(dataset_path):
 
     train_model(rf, X_train, y_train)
     test_model(rf, X_test, y_test)
-    save_model(rf, "data/rf.pkl")
+
+    os.makedirs("data/models")
+    save_model(rf, "data/models/rf.pkl")
 
 
 if __name__ == "__main__":

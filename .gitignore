@@ -5,3 +5,12 @@ __pycache__
 # Dataset
 /data/*
 !data/.gitkeep
+
+*.swp
+package-lock.json
+.pytest_cache
+*.egg-info
+
+# CDK asset staging directory
+.cdk.staging
+cdk.out

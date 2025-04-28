@@ -1,1 +1,6 @@
+# Dev Environment
 .venv
+
+# Dataset
+/data/*
+!data/.gitkeep

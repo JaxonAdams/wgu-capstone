@@ -1,5 +1,6 @@
 # Dev Environment
 .venv
+__pycache__
 
 # Dataset
 /data/*

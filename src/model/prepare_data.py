@@ -45,13 +45,16 @@ def categorical_and_numerical_columns(df: pd.DataFrame, target_col: str):
     return categorical_cols, numerical_cols
 
 
-def handle_missing_values(df: pd.DataFrame, categorical_cols, numerical_cols: list):
+def handle_missing_values(df: pd.DataFrame, categorical_cols: list, numerical_cols: list):
 
-    num_imputer = SimpleImputer(strategy="median")
-    cat_imputer = SimpleImputer(strategy="constant", fill_value="missing", keep_empty_features=True)
+    # Fill numerical columns with median
+    for col in numerical_cols:
+        median = df[col].median()
+        df[col] = df[col].fillna(median)
 
-    df[numerical_cols] = num_imputer.fit_transform(df[numerical_cols])
-    df[categorical_cols] = cat_imputer.fit_transform(df[categorical_cols])
+    # Fill categorical columns with a placeholder
+    for col in categorical_cols:
+        df[col] = df[col].fillna("missing")
 
     return df
 

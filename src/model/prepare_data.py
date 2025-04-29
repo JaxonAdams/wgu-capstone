@@ -25,7 +25,8 @@ def drop_unhelpful_columns(df: pd.DataFrame):
         "debt_settlement_flag_date", "settlement_status", "settlement_date",
         "settlement_amount", "settlement_percentage", "settlement_term",
         "sec_app_earliest_cr_line", "sec_app_mths_since_last_major_derog",
-        "id", "emp_title", "title", "pymnt_plan", "next_pymnt_d",
+        "id", "emp_title", "title", "pymnt_plan", "next_pymnt_d", "issue_d",
+        "delinq_2yrs", "last_pymnt_d", "last_pymnt_amnt",
     ]
 
     return df.drop(columns=to_drop, errors="ignore")

@@ -5,6 +5,7 @@ __pycache__
 # Dataset
 /data/*
 !data/.gitkeep
+!data/visualizations
 
 *.swp
 package-lock.json

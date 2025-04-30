@@ -4,15 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-
-def read_large_csv(path, chunk_size=100_000):
-    
-    chunks = []
-    for chunk in pd.read_csv(path, low_memory=False, chunksize=chunk_size):
-        chunks.append(chunk)
-    
-    df = pd.concat(chunks, ignore_index=True)
-    return df
+from utils.utils import read_large_csv
 
 
 def drop_unhelpful_columns(df: pd.DataFrame):

@@ -4,10 +4,7 @@ import matplotlib.pyplot as plt
 from src.utils.utils import read_large_csv
 
 
-def main(dataset_filepath):
-
-    # Load the dataset
-    df = read_large_csv(dataset_filepath)
+def plot(df):
 
     # Compute average credit score
     df["fico_avg"] = (df["fico_range_low"] + df["fico_range_high"]) / 2
@@ -19,8 +16,3 @@ def main(dataset_filepath):
     plt.xlabel("FICO Score")
     plt.ylabel("Frequency")
     plt.savefig("data/visualizations/fico_distribution.png", dpi=300, bbox_inches="tight")
-
-
-if __name__ == "__main__":
-
-    main("data/Loan_status_2007-2020Q3.csv")

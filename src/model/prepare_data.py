@@ -4,7 +4,9 @@ import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 
-from utils.utils import read_large_csv
+import src.plot.fico_distribution as fico_dist
+import src.plot.correlation_heatmap as c_hm
+from src.utils.utils import read_large_csv
 
 
 def drop_unhelpful_columns(df: pd.DataFrame):
@@ -89,6 +91,10 @@ def main(dataset_path: str):
 
     print("Cleaning up certain features...")
     df = transform_features(df)
+
+    print("Generating data visualizations...")
+    fico_dist.plot(df)
+    c_hm.plot(df)
 
     print("Splitting features and labels...")
     X = df.drop(columns=[target_col])

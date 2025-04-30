@@ -40,7 +40,7 @@ def clean_revol_util(df):
 
 
 def clean_int_rate(df):
-    df["int_rate"] = df["int_rate"].str.rstrip('%').astype(float)
+    df["int_rate"] = df["int_rate"].str.strip().rstrip('%').astype(float)
     return df
 
 

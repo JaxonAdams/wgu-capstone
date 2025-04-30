@@ -19,8 +19,19 @@ def drop_unhelpful_columns(df: pd.DataFrame):
         "debt_settlement_flag_date", "settlement_status", "settlement_date",
         "settlement_amount", "settlement_percentage", "settlement_term",
         "sec_app_earliest_cr_line", "sec_app_mths_since_last_major_derog",
-        "id", "emp_title", "title", "pymnt_plan", "next_pymnt_d", "issue_d",
-        "delinq_2yrs", "last_pymnt_d", "last_pymnt_amnt",
+        "id", "emp_title", "title", "pymnt_plan", "next_pymnt_d",
+        "delinq_2yrs", "last_pymnt_amnt", "funded_amnt", "funded_amnt_inv",
+        "sub_grade", "out_prncp", "out_prncp_inv", "total_pymnt", "total_pymnt_inv",
+        "total_rec_prncp", "total_rec_int", "total_rec_late_fee", "recoveries",
+        "collection_recovery_fee", "last_credit_pull_d", "last_fico_range_low",
+        "last_fico_range_high", "revol_bal_joint", "sec_app_fico_range_low",
+        "sec_app_fico_range_high", "sec_app_inq_last_6mths", "sec_app_mort_acc",
+        "sec_app_open_acc", "sec_app_revol_util", "sec_app_open_act_il",
+        "sec_app_num_rev_accts", "sec_app_chargeoff_within_12_mths",
+        "sec_app_collections_12_mths_ex_med", "policy_code", "deferral_term",
+        "debt_settlement_flag", "hardship_flag", "hardship_type", "hardship_reason",
+        "hardship_status", "hardship_payoff_balance_amount", "installment", "initial_list_status",
+        "application_type", "verification_status_joint", "annual_inc_joint", "dti_joint",
     ]
 
     return df.drop(columns=to_drop, errors="ignore")
@@ -36,28 +47,28 @@ def get_feature_types(df: pd.DataFrame, target_col: str):
     return categorical_cols, numerical_cols
 
 
-def clean_revol_util(df):
-    df["revol_util"] = df["revol_util"].str.rstrip('%').astype(float)
+def clean_int_rate(df):
+    df["int_rate"] = df["int_rate"].str.strip().str.rstrip('%').astype(float)
     return df
 
 
-def clean_int_rate(df):
-    df["int_rate"] = df["int_rate"].str.strip().rstrip('%').astype(float)
+def clean_revol_util(df):
+    df["revol_util"] = df["revol_util"].str.strip().str.rstrip('%').astype(float)
     return df
 
 
 def extract_date_features(df):
-    date_columns = ["issue_d", "earliest_cr_line", "last_pymnt_d", "last_credit_pull_d"]
+    date_columns = ["issue_d", "earliest_cr_line", "last_pymnt_d"]
     for col in date_columns:
         df[col] = pd.to_datetime(df[col], errors="coerce", format="%b-%Y")
 
-    # Example: how long ago the loan was issued
     df["loan_age_months"] = (datetime.today() - df["issue_d"]).dt.days // 30
     df["earliest_credit_months"] = (datetime.today() - df["earliest_cr_line"]).dt.days // 30
 
-    # Optional: extract year/month
     df["issue_year"] = df["issue_d"].dt.year
-    df["issue_month"] = df["issue_d"].dt.month
+
+    to_drop = ["issue_d", "earliest_cr_line"]
+    df.drop(columns=to_drop, errors="ignore")
 
     return df
 

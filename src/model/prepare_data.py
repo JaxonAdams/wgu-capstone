@@ -30,7 +30,7 @@ def drop_unhelpful_columns(df: pd.DataFrame):
         "sec_app_collections_12_mths_ex_med", "policy_code", "deferral_term",
         "debt_settlement_flag", "hardship_flag", "hardship_type", "hardship_reason",
         "hardship_status", "hardship_payoff_balance_amount", "installment", "initial_list_status",
-        "application_type", "verification_status_joint", "annual_inc_joint", "dti_joint", "grade",
+        "application_type", "verification_status_joint", "annual_inc_joint", "dti_joint",
         "disbursement_method", "verification_status", "last_pymnt_d", "issue_d", "earliest_cr_line",
     ]
 

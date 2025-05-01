@@ -7,7 +7,6 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OrdinalEncoder
-from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import (
     accuracy_score,
     classification_report,
@@ -66,7 +65,8 @@ def train_model(model, X_train, y_train):
 def test_model(model, X_test, y_test, threshold=0.5):
     
     # Due to dataset bias towards paid-in-full accounts,
-    # adjust the probability threshold to catch more default accounts
+    # optionally adjust the probability threshold to catch
+    # more default accounts
     y_proba = model.predict_proba(X_test)[:, 1]
     y_pred_thresh = (y_proba >= threshold).astype(int)
 

@@ -4,7 +4,6 @@ from aws_cdk import (
     Duration,
     CfnOutput,
     aws_lambda as _lambda,
-    aws_lambda_python_alpha as lambda_alpha,
     aws_apigatewayv2 as apigwv2,
     aws_apigatewayv2_integrations as integrations,
     aws_s3 as s3,
@@ -25,11 +24,9 @@ class WguCapstoneStack(Stack):
             auto_delete_objects=True,
         )
 
-        s3deploy.BucketDeployment(
-            self, "DeployModel",
-            sources=[s3deploy.Source.asset("data/models")],
-            destination_bucket=model_bucket,
-            destination_key_prefix="models",
+        CfnOutput(
+            self, "ModelBucketName",
+            value=model_bucket.bucket_name,
         )
 
         visualization_bucket = s3.Bucket(
@@ -58,7 +55,6 @@ class WguCapstoneStack(Stack):
                 "MODEL_KEY": "models/rf.pkl"
             }
         )
-
 
         model_bucket.grant_read(lambda_fn)
 

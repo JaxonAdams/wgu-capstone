@@ -40,7 +40,7 @@ class WguCapstoneStack(Stack):
         )
 
         s3deploy.BucketDeployment(
-            self, "DeployModel",
+            self, "DeployVisualizations",
             sources=[s3deploy.Source.asset("data/visualizations")],
             destination_bucket=visualization_bucket,
             destination_key_prefix="visualizations"

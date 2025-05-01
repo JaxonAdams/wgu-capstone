@@ -1,8 +1,6 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from src.utils.utils import read_large_csv
-
 
 def plot(df):
 
@@ -16,3 +14,4 @@ def plot(df):
     plt.xlabel("FICO Score")
     plt.ylabel("Frequency")
     plt.savefig("data/visualizations/fico_distribution.png", dpi=300, bbox_inches="tight")
+    plt.close()

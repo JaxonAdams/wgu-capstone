@@ -1,8 +1,6 @@
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-from src.utils.utils import read_large_csv
-
 
 def plot(df):
 
@@ -29,3 +27,4 @@ def plot(df):
     plt.title("Correlation Heatmap of Loan Features")
     plt.tight_layout()
     plt.savefig("data/visualizations/correlation_heatmap.png", dpi=300)
+    plt.close()

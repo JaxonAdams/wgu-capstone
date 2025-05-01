@@ -32,6 +32,20 @@ class WguCapstoneStack(Stack):
             destination_key_prefix="models",
         )
 
+        visualization_bucket = s3.Bucket(
+            self, "VisualizationBucket",
+            versioned=True,
+            removal_policy=RemovalPolicy.DESTROY,
+            auto_delete_objects=True,
+        )
+
+        s3deploy.BucketDeployment(
+            self, "DeployModel",
+            sources=[s3deploy.Source.asset("data/visualizations")],
+            destination_bucket=visualization_bucket,
+            destination_key_prefix="visualizations"
+        )
+
         # Lambda function for model prediction
         lambda_fn = _lambda.DockerImageFunction(
             self, "PredictLambda",

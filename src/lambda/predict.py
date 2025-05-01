@@ -52,6 +52,7 @@ def handler(event, _):
                 "will_default": bool(proba[0][1] > 0.5),
                 "probability": proba[0][1],
                 "input": input_df.to_dict(orient="records")[0],
+                "feature_order": feature_order,
             }),
         }
 

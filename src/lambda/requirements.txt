@@ -1,4 +1,0 @@
-joblib
-boto3
-scikit-learn
-pandas

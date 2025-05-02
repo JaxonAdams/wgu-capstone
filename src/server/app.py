@@ -1,5 +1,6 @@
 import io
 import os
+import json
 
 import boto3
 import joblib
@@ -8,6 +9,14 @@ from flask import Flask, request, jsonify
 
 
 app = Flask(__name__)
+
+
+# Load config.json
+with open("src/server/config.json") as f:
+    config = json.load(f)
+
+
+VISUALIZATION_BASE_URL = config["VISUALIZATION_BASE_URL"]
 
 
 def load_ml_model(s3_bucket_name, s3_key, is_local=True):
@@ -56,6 +65,18 @@ def predict():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+    
+
+@app.route("/api/visualizations", methods=["GET"])
+def get_visualization_urls():
+
+    return jsonify({
+        "credit_score_distribution": f"{VISUALIZATION_BASE_URL}/fico_distribution.png",
+        "feature_importance": f"{VISUALIZATION_BASE_URL}/feature_importance.png",
+        "correlation_heatmap": f"{VISUALIZATION_BASE_URL}/correlation_heatmap.png",
+        "precision_recall_curve": f"{VISUALIZATION_BASE_URL}/precision_recall_curve.png",
+        "probability_distribution": f"{VISUALIZATION_BASE_URL}/probability_distribution.png",
+    })
 
 
 # Load ML model on startup

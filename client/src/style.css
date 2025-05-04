@@ -189,6 +189,17 @@ form select:focus {
   box-shadow: 0 0 0 2px rgba(207, 150, 4, 0.5);
 }
 
+form select {
+  appearance: none; /* for consistent styling across browsers */
+  background-color: var(--background-primary);
+  color: var(--color-primary);
+}
+
+select option {
+  background-color: var(--background-primary);
+  color: var(--color-primary);
+}
+
 form button {
   padding: 0.75rem 1.5rem;
   background-color: var(--color-secondary);

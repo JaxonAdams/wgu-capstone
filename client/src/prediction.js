@@ -4,6 +4,8 @@ const BASE_URL = "http://localhost:5000";
 const handleFormSubmit = async event => {
     event.preventDefault();
 
+    const predictionContainer = document.getElementById("prediction-container");
+
     const form = event.target;
     const formData = new FormData(form);
     const data = {};
@@ -14,7 +16,6 @@ const handleFormSubmit = async event => {
     });
 
     const payload = { data };
-    console.log(payload);
 
     try {
         const response = await fetch(`${BASE_URL}/api/predict`, {
@@ -26,10 +27,16 @@ const handleFormSubmit = async event => {
         });
 
         const result = await response.json();
-        alert(`Prediction result: ${JSON.stringify(result)}`);
+        console.log(result);
+        
+        if ("will_default" in result) {
+            predictionContainer.innerHTML = `<strong>Prediction:</strong> The applicant is <span style="color: ${result.will_default ? 'red' : 'green'};">${result.will_default ? 'likely to default' : 'not likely to default'}.</span>`;
+        } else {
+            predictionContainer.innerHTML = `<span style="color: red;">Error: Invalid response format from server.</span>`;
+        }
     } catch (err) {
         console.error("Prediction failed:", err);
-        alert("There was an error submitting the loan application.");
+        predictionContainer.innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
     }
 };
 

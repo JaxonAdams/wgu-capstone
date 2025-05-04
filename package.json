@@ -1,0 +1,26 @@
+{
+  "name": "wgu-capstone",
+  "version": "1.0.0",
+  "description": "A Random Forest classifier trained to predict loan default from loan applications.",
+  "main": "src/server/app.py",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node tools/runDev.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JaxonAdams/wgu-capstone.git"
+  },
+  "author": "Jaxon Adams",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JaxonAdams/wgu-capstone/issues"
+  },
+  "homepage": "https://github.com/JaxonAdams/wgu-capstone#readme",
+  "devDependencies": {
+    "open": "^10.1.2"
+  }
+}

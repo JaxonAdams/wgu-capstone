@@ -17,3 +17,5 @@ package-lock.json
 cdk.out
 
 src/server/config.json
+
+node_modules

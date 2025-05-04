@@ -86,4 +86,4 @@ model, feature_order = load_ml_model(
     is_local=os.environ.get("LOCAL", "").lower() == "true",
 )
 
-app.run(debug=True)
+app.run(debug=True, use_reloader=False)

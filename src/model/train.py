@@ -15,8 +15,10 @@ from sklearn.metrics import (
     average_precision_score,
 )
 
+import src.plot.performance as perf
 import src.model.prepare_data as prep_data
 import src.plot.feature_importance as ft_imp
+import src.plot.confusion_matrix as conf_mat
 import src.plot.precision_recall_curve as pr_c
 import src.plot.probability_distribution as prob_dist
 from src.utils.utils import decorate_console_output
@@ -73,6 +75,7 @@ def test_model(model, X_test, y_test, threshold=0.5):
     roc_auc = roc_auc_score(y_test, y_proba)
     accuracy = accuracy_score(y_test, y_pred_thresh)
     avg_precision = average_precision_score(y_test, y_proba)
+    conf_mat = confusion_matrix(y_test, y_pred_thresh)
 
     print(f"Test Accuracy: {accuracy:.4f}")
     print(f"ROC AUC Score: {roc_auc:.4f}")
@@ -80,17 +83,28 @@ def test_model(model, X_test, y_test, threshold=0.5):
     print("\nClassification Report:")
     print(classification_report(y_test, y_pred_thresh))
     print("\nConfusion Matrix:")
-    print(confusion_matrix(y_test, y_pred_thresh))
+    print(conf_mat)
 
-    return y_test, y_proba
+    performance = {
+        "misc": {
+            "metrics": ["Accuracy", "ROC AUC", "PR AUC"],
+            "scores": [accuracy, roc_auc, avg_precision],
+            "colors": ["blue", "green", "yellow"],
+        },
+        "confusion_matrix": conf_mat,
+    }
+
+    return y_test, y_proba, performance
 
 
 @decorate_console_output("CREATING DATA VISUALIZATIONS")
-def create_visualizations(model, y_test, y_scores):
+def create_visualizations(model, y_test, y_scores, performance):
 
     ft_imp.plot(model)
     pr_c.plot(y_test, y_scores)
     prob_dist.plot(y_test, y_scores)
+    perf.plot(**performance["misc"])
+    conf_mat.plot(performance["confusion_matrix"])
 
 
 @decorate_console_output("SAVING THE TRAINED MODEL")
@@ -123,9 +137,9 @@ def main(dataset_path):
     pipeline = create_pipeline(rf, num_cols, cat_cols)
 
     train_model(pipeline, X_train, y_train)
-    y_test, y_scores = test_model(pipeline, X_test, y_test, threshold=0.3)
+    y_test, y_scores, performance = test_model(pipeline, X_test, y_test, threshold=0.3)
 
-    create_visualizations(pipeline, y_test, y_scores)
+    create_visualizations(pipeline, y_test, y_scores, performance)
 
     os.makedirs("data/models", exist_ok=True)
     save_model(pipeline, X_train.columns.tolist(), "data/models/rf.pkl")

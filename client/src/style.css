@@ -86,19 +86,23 @@ main {
   place-items: center;
 }
 
-article {
+div.section {
   width: 70%;
   min-width: 320px;
 }
 
-article > h1 {
+div.section > h1 {
   padding: 20px;
   border-bottom: 3px solid var(--color-primary);
 }
 
-article > p {
+div.section > p {
   font-size: 1.3rem;
   line-height: 1.5;
+}
+
+.visualization-img {
+  width: 100%;
 }
 
 @media (prefers-color-scheme: light) {

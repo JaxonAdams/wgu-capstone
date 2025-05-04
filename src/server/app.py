@@ -5,10 +5,12 @@ import json
 import boto3
 import joblib
 import pandas as pd
+from flask_cors import CORS
 from flask import Flask, request, jsonify
 
 
 app = Flask(__name__)
+CORS(app)
 
 
 # Load config.json

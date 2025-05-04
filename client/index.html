@@ -22,15 +22,14 @@
       </header>
 
       <main>
-        <br/>
-        <article>
+        <div class="section">
           <h1>About This Project</h1>
           <p>
             This capstone project explores machine learning techniques for predicting loan
             defaults using LendingClub's historical loan data. This model, a
             <span class="color-secondary">Random Forest classifier</span>, analyzes borrower
             information and loan characteristics to estimate the likelihood of default. The
-            model's prediction functionality is exposed through a Flask server, while visualizations
+            model's prediction functionality is exposed through a Flask API, while visualizations
             are hosted on Amazon S3 and integrated below to provide insight into feature importance,
             credit score distributions, and model performance.
           </p>
@@ -38,7 +37,12 @@
             The goal is to demonstrate how predictive analytics can support risk assessment in
             lending, helping financial institutions make data-informed decisions.
           </p>
-        </article>
+        </div>
+
+        <div class="section">
+          <h1>Data Visualizations</h1>
+          <div id="visualizations-container" class="card-container"></div>
+        </div>
       </main>
     </div>
     <script type="module" src="/src/dashboard.js"></script>

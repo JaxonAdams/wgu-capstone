@@ -76,6 +76,8 @@ def get_visualization_urls():
         "correlation_heatmap": f"{VISUALIZATION_BASE_URL}/correlation_heatmap.png",
         "precision_recall_curve": f"{VISUALIZATION_BASE_URL}/precision_recall_curve.png",
         "probability_distribution": f"{VISUALIZATION_BASE_URL}/probability_distribution.png",
+        "performance": f"{VISUALIZATION_BASE_URL}/performance.png",
+        "confusion_matrix": f"{VISUALIZATION_BASE_URL}/confusion_matrix.png",
     })
 
 

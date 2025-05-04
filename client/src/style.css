@@ -48,7 +48,7 @@ header {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2em;
   line-height: 1.1;
 }
 
@@ -80,8 +80,25 @@ nav.header-element > .active {
   color: var(--color-secondary);
 }
 
-.header-title {
-  font-size: 2em;
+main {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+}
+
+article {
+  width: 70%;
+  min-width: 320px;
+}
+
+article > h1 {
+  padding: 20px;
+  border-bottom: 3px solid var(--color-primary);
+}
+
+article > p {
+  font-size: 1.3rem;
+  line-height: 1.5;
 }
 
 @media (prefers-color-scheme: light) {

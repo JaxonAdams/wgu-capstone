@@ -1,5 +1,7 @@
 // Hardcoded for now; logic should be filled out before deployment
 const BASE_URL = "http://localhost:5000";
+let currentSlide = 0;
+let autoplayInterval;
 
 const snakeToTitle = (str) => {
     return str
@@ -27,7 +29,11 @@ const fetchVisualizationURLs = async () => {
 
 };
 
-const attachVisToContainer = (container, visDesc, visUrl) => {
+const createSlide = (visDesc, visUrl) => {
+
+    const slide = document.createElement("div");
+    slide.classList.add("slide");
+
     const img = document.createElement("img");
     img.src = visUrl;
     img.alt = visDesc;
@@ -37,22 +43,83 @@ const attachVisToContainer = (container, visDesc, visUrl) => {
     caption.textContent = visDesc;
     caption.classList.add("visualization-caption");
 
-    container.appendChild(caption);
-    container.appendChild(img);
+    slide.appendChild(caption);
+    slide.appendChild(img);
+
+    return slide
+
+};
+
+const showSlide = index => {
+
+    const slides = document.querySelectorAll(".slide");
+    if (slides.length === 0) return;
+
+    slides.forEach((slide, i) => {
+        slide.style.display = i === index ? "block" : "none";
+    });
+
+    currentSlide = index;
+
+};
+
+const nextSlide = () => {
+
+    const slides = document.querySelectorAll(".slide");
+    const next = (currentSlide + 1) % slides.length;
+    showSlide(next);
+
+};
+
+const prevSlide = () => {
+
+    const slides = document.querySelectorAll(".slide");
+    const prev = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(prev);
+
+};
+
+const startAutoplay = () => {
+
+    autoplayInterval = setInterval(nextSlide, 5000);
+
+};
+
+const stopAutoplay = () => {
+
+    clearInterval(autoplayInterval);
+
 };
 
 const loadVisualizations = async () => {
 
-    const visContainer = document.getElementById("visualizations-container");
-
+    const visWrapper = document.getElementById("visualizations-wrapper");
     const S3Urls = await fetchVisualizationURLs();
+    
     for (const [vis, url] of Object.entries(S3Urls)) {
         const visTitle = snakeToTitle(vis);
-        attachVisToContainer(visContainer, visTitle, url);
+        const slide = createSlide(visTitle, url);
+        visWrapper.appendChild(slide);
     }
+
+    showSlide(0);
 
 };
 
 document.addEventListener("DOMContentLoaded", () => {
-    loadVisualizations();
+
+    document.getElementById("next-btn").addEventListener("click", () => {
+        nextSlide();
+        stopAutoplay();
+        startAutoplay();
+    });
+
+    document.getElementById("prev-btn").addEventListener("click", () => {
+        prevSlide();
+        stopAutoplay();
+        startAutoplay();
+    });
+
+    loadVisualizations().then(() => startAutoplay());
+
 })

@@ -22,7 +22,162 @@
       </header>
 
       <main>
-        <h2>Prediction UI - TBD</h2>
+        <div class="section">
+          <h1>Request a Prediction - Will This Loan Default?</h1>
+
+          <form id="loan-form">
+
+            <button type="submit">Submit Application</button>
+
+            <fieldset>
+              <legend>Loan Details</legend>
+              <label>Loan Amount: <input type="number" name="loan_amnt" value="1500" required /></label>
+              <label>Term:
+                <select name="term">
+                  <option>36 months</option>
+                  <option>60 months</option>
+                </select>
+              </label>
+              <label>Interest Rate (%): <input type="number" step="0.01" name="int_rate" value="13.56" required /></label>
+              <label>Grade:
+                <select name="grade">
+                  <option>A</option><option>B</option><option>C</option><option>D</option><option>E</option>
+                </select>
+              </label>
+              <label>Purpose: <input type="text" name="purpose" value="debt_consolidation" /></label>
+            </fieldset>
+          
+            <fieldset>
+              <legend>Applicant Info</legend>
+              <label>Employment Length:
+                <select name="emp_length">
+                  <option>10+ years</option>
+                  <option>2 years</option>
+                  <option>1 year</option>
+                  <option>&lt; 1 year</option>
+                </select>
+              </label>
+              <label>Home Ownership:
+                <select name="home_ownership">
+                  <option>RENT</option><option>OWN</option><option>MORTGAGE</option><option>OTHER</option>
+                </select>
+              </label>
+              <label>Annual Income: <input type="number" name="annual_inc" value="55000" /></label>
+              <label>State: <input type="text" name="addr_state" value="CA" /></label>
+              <label>DTI: <input type="number" step="0.01" name="dti" value="18.9" /></label>
+            </fieldset>
+          
+            <fieldset>
+              <legend>FICO & Inquiries</legend>
+              <label>FICO Low: <input type="number" name="fico_range_low" value="680" /></label>
+              <label>FICO High: <input type="number" name="fico_range_high" value="684" /></label>
+              <label>Inquiries Last 6 Months: <input type="number" name="inq_last_6mths" value="1" /></label>
+              <label>Months Since Last Delinq: <input type="number" name="mths_since_last_delinq" value="24" /></label>
+              <label>Months Since Last Record: <input type="number" name="mths_since_last_record" /></label>
+            </fieldset>
+          
+            <fieldset>
+              <legend>Credit Accounts</legend>
+              <label>Open Accounts: <input type="number" name="open_acc" value="12" /></label>
+              <label>Public Records: <input type="number" name="pub_rec" value="0" /></label>
+              <label>Revolving Balance: <input type="number" name="revol_bal" value="12000" /></label>
+              <label>Revolving Util (%): <input type="number" step="0.1" name="revol_util" value="52.3" /></label>
+              <label>Total Accounts: <input type="number" name="total_acc" value="34" /></label>
+            </fieldset>
+
+            <fieldset>
+              <legend>Delinquencies & Derogatory Marks</legend>
+              <label>Collections (excl. medical): <input type="number" name="collections_12_mths_ex_med" value="0" /></label>
+              <label>Months Since Major Derogatory: <input type="number" name="mths_since_last_major_derog" /></label>
+              <label>Accounts Now Delinquent: <input type="number" name="acc_now_delinq" value="0" /></label>
+              <label>Total Collection Amount: <input type="number" name="tot_coll_amt" value="0" /></label>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Balances & Credit Usage</legend>
+              <label>Total Current Balance: <input type="number" name="tot_cur_bal" value="87000" /></label>
+              <label>Open Accounts (6m): <input type="number" name="open_acc_6m" value="2" /></label>
+              <label>Installment Loans (active): <input type="number" name="open_act_il" value="4" /></label>
+              <label>Installment Loans (12m): <input type="number" name="open_il_12m" value="1" /></label>
+              <label>Installment Loans (24m): <input type="number" name="open_il_24m" value="2" /></label>
+              <label>Months Since Recent Installment: <input type="number" name="mths_since_rcnt_il" value="6" /></label>
+              <label>Total Installment Balance: <input type="number" name="total_bal_il" value="18000" /></label>
+              <label>Installment Utilization (%): <input type="number" step="0.1" name="il_util" value="65.0" /></label>
+              <label>Open Revolving (12m): <input type="number" name="open_rv_12m" value="2" /></label>
+              <label>Open Revolving (24m): <input type="number" name="open_rv_24m" value="3" /></label>
+              <label>Max Balance on Bankcard: <input type="number" name="max_bal_bc" value="5000" /></label>
+              <label>All Utilization (%): <input type="number" step="0.1" name="all_util" value="60.0" /></label>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Credit Limits & Inquiries</legend>
+              <label>Total Revolving Credit Limit: <input type="number" name="total_rev_hi_lim" value="23000" /></label>
+              <label>Inquiries for Finance: <input type="number" name="inq_fi" value="1" /></label>
+              <label>Total Credit Union Trades: <input type="number" name="total_cu_tl" value="4" /></label>
+              <label>Inquiries Last 12 Months: <input type="number" name="inq_last_12m" value="2" /></label>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Account Age & Credit Lines</legend>
+              <label>Accounts Opened (24m): <input type="number" name="acc_open_past_24mths" value="6" /></label>
+              <label>Average Current Balance: <input type="number" name="avg_cur_bal" value="7250" /></label>
+              <label>Bankcard Open to Buy: <input type="number" name="bc_open_to_buy" value="4500" /></label>
+              <label>Bankcard Utilization (%): <input type="number" step="0.1" name="bc_util" value="55.0" /></label>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Credit Events</legend>
+              <label>Charge-offs within 12 Months: <input type="number" name="chargeoff_within_12_mths" value="0" /></label>
+              <label>Delinquent Amount: <input type="number" name="delinq_amnt" value="0" /></label>
+              <label>Months Since Oldest Installment: <input type="number" name="mo_sin_old_il_acct" value="120" /></label>
+              <label>Months Since Oldest Revolving: <input type="number" name="mo_sin_old_rev_tl_op" value="150" /></label>
+              <label>Months Since Recent Revolving: <input type="number" name="mo_sin_rcnt_rev_tl_op" value="5" /></label>
+              <label>Months Since Recent TL: <input type="number" name="mo_sin_rcnt_tl" value="3" /></label>
+              <label>Mortgage Accounts: <input type="number" name="mort_acc" value="1" /></label>
+              <label>Months Since Recent BC: <input type="number" name="mths_since_recent_bc" value="4" /></label>
+              <label>Months Since BC Delinq: <input type="number" name="mths_since_recent_bc_dlq" /></label>
+              <label>Months Since Inq: <input type="number" name="mths_since_recent_inq" value="2" /></label>
+              <label>Months Since Revol Delinq: <input type="number" name="mths_since_recent_revol_delinq" /></label>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Account Counts</legend>
+              <label>Accounts Ever 120+ Days Pd: <input type="number" name="num_accts_ever_120_pd" value="0" /></label>
+              <label>Active Bankcard TL: <input type="number" name="num_actv_bc_tl" value="4" /></label>
+              <label>Active Revolving TL: <input type="number" name="num_actv_rev_tl" value="6" /></label>
+              <label>Bankcard Satisfactory: <input type="number" name="num_bc_sats" value="5" /></label>
+              <label>Bankcard TL: <input type="number" name="num_bc_tl" value="8" /></label>
+              <label>Installment TL: <input type="number" name="num_il_tl" value="6" /></label>
+              <label>Open Revolving TL: <input type="number" name="num_op_rev_tl" value="7" /></label>
+              <label>Total Revolving Accounts: <input type="number" name="num_rev_accts" value="11" /></label>
+              <label>Revolving Accounts with Balance: <input type="number" name="num_rev_tl_bal_gt_0" value="7" /></label>
+              <label>Total Satisfactory Accounts: <input type="number" name="num_sats" value="14" /></label>
+              <label>TL 120dpd (2m): <input type="number" name="num_tl_120dpd_2m" value="0" /></label>
+              <label>TL 30dpd: <input type="number" name="num_tl_30dpd" value="0" /></label>
+              <label>TL 90g DPD (24m): <input type="number" name="num_tl_90g_dpd_24m" value="0" /></label>
+              <label>TL Open (12m): <input type="number" name="num_tl_op_past_12m" value="3" /></label>
+            </fieldset>
+            
+            <fieldset>
+              <legend>Derived Features</legend>
+              <label>Percent Never Delinquent: <input type="number" step="0.1" name="pct_tl_nvr_dlq" value="100.0" /></label>
+              <label>Percent BC &gt; 75% Util: <input type="number" step="0.1" name="percent_bc_gt_75" value="25.0" /></label>
+              <label>Public Record Bankruptcies: <input type="number" name="pub_rec_bankruptcies" value="0" /></label>
+              <label>Tax Liens: <input type="number" name="tax_liens" value="0" /></label>
+              <label>Total High Credit Limit: <input type="number" name="tot_hi_cred_lim" value="95000" /></label>
+              <label>Total Balance (excl. mortgage): <input type="number" name="total_bal_ex_mort" value="30000" /></label>
+              <label>Total BC Limit: <input type="number" name="total_bc_limit" value="10000" /></label>
+              <label>Total IL High Credit Limit: <input type="number" name="total_il_high_credit_limit" value="25000" /></label>
+              <label>FICO Band: <input type="text" name="fico_band" value="680-689" /></label>
+              <label>Interest Rate Bin: <input type="text" name="int_rate_bin" value="13-14%" /></label>
+              <label>Income to Loan Ratio: <input type="number" step="0.01" name="income_to_loan" value="3.67" /></label>
+              <label>Inquiries per Account: <input type="number" step="0.01" name="inq_per_account" value="0.17" /></label>
+              <label>FICO Average: <input type="number" name="fico_avg" value="682" /></label>
+            </fieldset>
+
+          </form>
+
+        </div>
       </main>
     </div>
     <script type="module" src="/src/prediction.js"></script>

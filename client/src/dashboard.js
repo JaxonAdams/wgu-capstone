@@ -1,5 +1,6 @@
 // Hardcoded for now; logic should be filled out before deployment
 const BASE_URL = "http://localhost:5000";
+
 let currentSlide = 0;
 let autoplayInterval;
 

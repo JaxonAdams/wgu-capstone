@@ -2,8 +2,6 @@ import os
 import argparse
 import subprocess
 
-import pandas as pd
-
 from src.utils.utils import read_large_csv
 
 

@@ -75,7 +75,7 @@ def predict():
         proba = model.predict_proba(input_df)
 
         response_data = {
-            "will_default": bool(proba[0][1] > 0.5),
+            "will_default": bool(proba[0][1] > 0.3),
         }
 
         if metadata.get("verbose", False):

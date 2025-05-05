@@ -107,7 +107,9 @@ const stopAutoplay = () => {
 const loadVisualizations = async () => {
 
     const visWrapper = document.getElementById("visualizations-wrapper");
+    visWrapper.innerText = "Loading...";
     const S3Urls = await fetchVisualizationURLs();
+    visWrapper.innerHTML = "";
     
     for (const [vis, url] of Object.entries(S3Urls)) {
         const visTitle = snakeToTitle(vis);

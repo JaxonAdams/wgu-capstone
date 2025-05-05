@@ -115,4 +115,13 @@ model, feature_order = load_ml_model(
     is_local=os.environ.get("LOCAL", "").lower() == "true",
 )
 
-app.run(debug=True, host="0.0.0.0", use_reloader=False)
+app_settings = {
+    "host": "0.0.0.0",
+    "use_reloader": False,
+}
+
+if os.getenv("LOCAL", "").lower() == "true":
+    app_settings["debug"] = True
+    del app_settings["host"]
+
+app.run(**app_settings)

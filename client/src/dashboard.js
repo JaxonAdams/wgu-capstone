@@ -1,6 +1,4 @@
-// Hardcoded for now; logic should be filled out before deployment
-const BASE_URL = "http://localhost:5000";
-
+const BASE_URL = import.meta.env.VITE_BASE_URL;
 const apiToken = import.meta.env.VITE_API_TOKEN;
 
 let currentSlide = 0;
@@ -15,7 +13,7 @@ const snakeToTitle = (str) => {
 
 const fetchVisualizationURLs = async (attempt = 0) => {
     
-    if (attempt < 5) {
+    if (attempt < 60) {
         try {
     
             const response = await fetch(`${BASE_URL}/api/visualizations`, {

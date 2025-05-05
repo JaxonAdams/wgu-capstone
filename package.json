@@ -8,9 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install:all": "pip install -r requirements.txt && pip install -r src/server/requirements.txt && npm i && cd client && npm i",
-    "download:dataset": "python tools/scripts/download_dataset.py",
-    "download:dataset:sample": "python tools/scripts/download_dataset.py --sample",
+    "install:all": "pip install -r requirements.txt && npm i && cd client && npm i",
+    "download:dataset": "python -m tools.scripts.download_dataset",
+    "download:dataset:sample": "python -m tools.scripts.download_dataset --sample",
     "train:model": "python -m src.model.train",
     "dev": "node tools/runDev.js",
     "for:evaluator": "npm run install:all && npm run download:dataset:sample && npm run train:model && npm run dev"

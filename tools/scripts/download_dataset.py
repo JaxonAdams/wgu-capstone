@@ -4,11 +4,13 @@ import subprocess
 
 import pandas as pd
 
+from src.utils.utils import read_large_csv
+
 
 def sample_and_overwrite(file_path: str, sample_fraction: float = 0.05, seed: int = 42):
     
     print("Loading dataset...")
-    df = pd.read_csv(file_path, low_memory=False)
+    df = read_large_csv(file_path)
 
     print(f"Sampling {sample_fraction * 100}% of the dataset...")
     sampled_df = df.sample(frac=sample_fraction, random_state=seed)

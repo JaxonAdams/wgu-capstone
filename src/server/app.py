@@ -72,7 +72,6 @@ def predict():
         # Construct DataFrame with the correct feature order
         input_df = pd.DataFrame([{f: data.get(f) for f in feature_order}])
 
-        # prediction = model.predict(input_df)
         proba = model.predict_proba(input_df)
 
         response_data = {

@@ -54,6 +54,13 @@ def token_required(f):
     return decorated
 
 
+@app.route("/")
+@app.route("/ping", methods=["GET"])
+def ping():
+
+    return "pong", 200
+
+
 @app.route("/api/predict", methods=["POST"])
 @token_required
 def predict():
@@ -99,12 +106,6 @@ def get_visualization_urls():
         "performance": f"{VISUALIZATION_BASE_URL}/performance.png",
         "confusion_matrix": f"{VISUALIZATION_BASE_URL}/confusion_matrix.png",
     })
-
-
-@app.route("/ping", methods=["GET"])
-def ping():
-
-    return "pong", 200
 
 
 # Load ML model on startup

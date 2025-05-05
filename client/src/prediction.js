@@ -1,6 +1,8 @@
 // Hardcoded for now; logic should be filled out before deployment
 const BASE_URL = "http://localhost:5000";
 
+const apiToken = import.meta.env.VITE_API_TOKEN;
+
 const handleFormSubmit = async event => {
     event.preventDefault();
 
@@ -22,6 +24,7 @@ const handleFormSubmit = async event => {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                'Authorization': `Bearer ${apiToken}`,
             },
             body: JSON.stringify(payload),
         });

@@ -19,3 +19,4 @@ cdk.out
 src/server/config.json
 
 node_modules
+.env

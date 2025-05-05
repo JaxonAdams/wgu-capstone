@@ -1,6 +1,8 @@
 // Hardcoded for now; logic should be filled out before deployment
 const BASE_URL = "http://localhost:5000";
 
+const apiToken = import.meta.env.VITE_API_TOKEN;
+
 let currentSlide = 0;
 let autoplayInterval;
 
@@ -16,7 +18,11 @@ const fetchVisualizationURLs = async (attempt = 0) => {
     if (attempt < 5) {
         try {
     
-            const response = await fetch(`${BASE_URL}/api/visualizations`)
+            const response = await fetch(`${BASE_URL}/api/visualizations`, {
+                headers: {
+                    'Authorization': `Bearer ${apiToken}`,
+                },
+            })
         
             if (!response.ok) {
                 throw new Error(`HTTP Error - status: ${response.status}`);

@@ -1,10 +1,12 @@
 import io
 import os
 import json
+from functools import wraps
 
 import boto3
 import joblib
 import pandas as pd
+from dotenv import load_dotenv
 from flask_cors import CORS
 from flask import Flask, request, jsonify
 
@@ -13,11 +15,15 @@ app = Flask(__name__)
 CORS(app)
 
 
-# Load config.json
+# Load configuration
 with open("src/server/config.json") as f:
     config = json.load(f)
 
 
+load_dotenv("src/server/.env")
+
+
+API_TOKEN = os.getenv("API_TOKEN")
 VISUALIZATION_BASE_URL = config["VISUALIZATION_BASE_URL"]
 
 
@@ -38,7 +44,23 @@ def load_ml_model(s3_bucket_name, s3_key, is_local=True):
     return model["model"], model["features"]
 
 
+def token_required(f):
+    @wraps(f)
+    def decorated(*args, **kwargs):
+        auth_header = request.headers.get('Authorization')
+        if not auth_header or not auth_header.startswith("Bearer "):
+            return jsonify({'message': 'Missing or invalid token'}), 401
+
+        token = auth_header.split(" ")[1]
+        if token != API_TOKEN:
+            return jsonify({'message': 'Unauthorized'}), 403
+
+        return f(*args, **kwargs)
+    return decorated
+
+
 @app.route("/api/predict", methods=["POST"])
+@token_required
 def predict():
 
     try:
@@ -70,6 +92,7 @@ def predict():
     
 
 @app.route("/api/visualizations", methods=["GET"])
+@token_required
 def get_visualization_urls():
 
     return jsonify({

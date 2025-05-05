@@ -101,6 +101,12 @@ def get_visualization_urls():
     })
 
 
+@app.route("/ping")
+def ping():
+
+    return "pong", 200
+
+
 # Load ML model on startup
 model, feature_order = load_ml_model(
     os.environ.get("MODEL_BUCKET_NAME", ""),

@@ -11,21 +11,29 @@ const snakeToTitle = (str) => {
         .join(" ");
 };
 
-const fetchVisualizationURLs = async () => {
+const fetchVisualizationURLs = async (attempt = 0) => {
     
-    try {
+    if (attempt < 5) {
+        try {
     
-        const response = await fetch(`${BASE_URL}/api/visualizations`)
+            const response = await fetch(`${BASE_URL}/api/visualizations`)
+        
+            if (!response.ok) {
+                throw new Error(`HTTP Error - status: ${response.status}`);
+            }
     
-        if (!response.ok) {
-            throw new Error(`HTTP Error - status: ${response.status}`);
+            const S3Data = await response.json();
+            return S3Data;
+    
+        } catch (error) {
+            console.error("Error fetching S3 URLs:", error);
+            console.log("Retrying...");
+
+            const nextAttempt = attempt + 1;
+            setTimeout(() => fetchVisualizationURLs(attempt = nextAttempt), 1000);
         }
-
-        const S3Data = await response.json();
-        return S3Data;
-
-    } catch (error) {
-        console.error("Error fetching S3 URLs:", error)
+    } else {
+        console.error("Failed to load visualizations after max attempts");
     }
 
 };

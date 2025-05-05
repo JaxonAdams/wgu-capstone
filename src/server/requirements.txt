@@ -3,4 +3,5 @@ boto3
 joblib
 pandas
 dotenv
+flask-cors
 scikit-learn

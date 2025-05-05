@@ -1,8 +1,30 @@
 import os
+import argparse
 import subprocess
+
+import pandas as pd
+
+
+def sample_and_overwrite(file_path: str, sample_fraction: float = 0.05, seed: int = 42):
+    
+    print("Loading dataset...")
+    df = pd.read_csv(file_path, low_memory=False)
+
+    print(f"Sampling {sample_fraction * 100}% of the dataset...")
+    sampled_df = df.sample(frac=sample_fraction, random_state=seed)
+
+    print("Overwriting the original file with the sampled data...")
+    sampled_df.to_csv(file_path, index=False)
+    print("Done! File overwritten with sampled data.")
 
 
 def download_kaggle_dataset(dataset, target_folder):
+
+    parser = argparse.ArgumentParser(description="Optionally sample and overwrite a large CSV.")
+    parser.add_argument("--sample", action="store_true", help="Sample and overwrite the CSV file.")
+    parser.add_argument("--fraction", type=float, default=0.05, help="Fraction of rows to sample (default 0.05).")
+
+    args = parser.parse_args()
 
     # Ensure the output directory exists
     os.makedirs(target_folder, exist_ok=True)
@@ -36,6 +58,11 @@ def download_kaggle_dataset(dataset, target_folder):
     csv_path = os.path.join(target_folder, csv_file)
 
     os.rename(gzip_path, csv_path)
+
+    if args.sample:
+        sample_and_overwrite(csv_path, args.fraction)
+    else:
+        print("No sampling performed. Use --sample to enable sampling.")
 
     print(f"Dataset ready: {csv_path}")
 

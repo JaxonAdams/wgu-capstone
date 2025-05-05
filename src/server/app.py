@@ -1,6 +1,5 @@
 import io
 import os
-import json
 from functools import wraps
 
 import boto3

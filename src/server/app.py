@@ -15,16 +15,11 @@ app = Flask(__name__)
 CORS(app)
 
 
-# Load configuration
-with open("src/server/config.json") as f:
-    config = json.load(f)
-
-
 load_dotenv("src/server/.env")
 
 
 API_TOKEN = os.getenv("API_TOKEN")
-VISUALIZATION_BASE_URL = config["VISUALIZATION_BASE_URL"]
+VISUALIZATION_BASE_URL = os.getenv("VISUALIZATION_BASE_URL")
 
 
 def load_ml_model(s3_bucket_name, s3_key, is_local=True):

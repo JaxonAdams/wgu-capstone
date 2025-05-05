@@ -20,7 +20,11 @@ This is a machine learning-powered web application designed for early-stage loan
 
 -----
 
-(images here)
+![image](https://github.com/user-attachments/assets/a2fabdd2-9aab-494e-b033-535af5cbeddd)
+
+![image](https://github.com/user-attachments/assets/fd54f239-d7cf-4090-a4a0-00e84e8cebf4)
+
+
 
 -----
 

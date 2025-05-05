@@ -101,7 +101,7 @@ def get_visualization_urls():
     })
 
 
-@app.route("/ping")
+@app.route("/ping", methods=["GET"])
 def ping():
 
     return "pong", 200

@@ -31,5 +31,7 @@ This is a machine learning-powered web application designed for early-stage loan
 ## 📬 Contact
 
 Author: Jaxon Adams
+
 Email: [jadamsresume1@gmail.com](mailto:jadamsresume1@gmail.com)
+
 LinkedIn: [Jaxon Adams](https://www.linkedin.com/in/jaxon-adams-ba5743229/)
